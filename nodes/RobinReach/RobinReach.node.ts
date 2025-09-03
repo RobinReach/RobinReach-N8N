@@ -333,12 +333,17 @@ export class RobinReach implements INodeType {
       // Load available brands
       async getBrands(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
         try {
+          const credentials = await this.getCredentials('robinReachApi');
+          const baseURL = credentials['environment'] === 'development' 
+            ? 'http://localhost:3000/api/v1' 
+            : 'https://robinreach.com/api/v1';
+
           const responseData = await this.helpers.requestWithAuthentication.call(
             this,
             'robinReachApi',
             {
               method: 'GET',
-              url: '/brands',
+              url: `${baseURL}/brands`,
               json: true,
             },
           );
@@ -363,12 +368,17 @@ export class RobinReach implements INodeType {
         }
 
         try {
+          const credentials = await this.getCredentials('robinReachApi');
+          const baseURL = credentials['environment'] === 'development' 
+            ? 'http://localhost:3000/api/v1' 
+            : 'https://robinreach.com/api/v1';
+
           const responseData = await this.helpers.requestWithAuthentication.call(
             this,
             'robinReachApi',
             {
               method: 'GET',
-              url: `/social_profiles?brand_id=${brandId}`,
+              url: `${baseURL}/social_profiles?brand_id=${brandId}`,
               json: true,
             },
           );
@@ -416,12 +426,17 @@ export class RobinReach implements INodeType {
           // ========================================
           // LIST BRANDS
           // ========================================
+          const credentials = await this.getCredentials('robinReachApi');
+          const baseURL = credentials['environment'] === 'development' 
+            ? 'http://localhost:3000/api/v1' 
+            : 'https://robinreach.com/api/v1';
+
           responseData = await this.helpers.requestWithAuthentication.call(
             this,
             'robinReachApi',
             {
               method: 'GET',
-              url: '/brands',
+              url: `${baseURL}/brands`,
               json: true,
             },
           );
@@ -449,13 +464,17 @@ export class RobinReach implements INodeType {
           // LIST SOCIAL PROFILES
           // ========================================
           const brandId = this.getNodeParameter('brandId', i) as string;
+          const credentials = await this.getCredentials('robinReachApi');
+          const baseURL = credentials['environment'] === 'development' 
+            ? 'http://localhost:3000/api/v1' 
+            : 'https://robinreach.com/api/v1';
 
           responseData = await this.helpers.requestWithAuthentication.call(
             this,
             'robinReachApi',
             {
               method: 'GET',
-              url: `/social_profiles?brand_id=${brandId}`,
+              url: `${baseURL}/social_profiles?brand_id=${brandId}`,
               json: true,
             },
           );
@@ -487,20 +506,25 @@ export class RobinReach implements INodeType {
           const postAction = this.getNodeParameter('postAction', i) as string;
           const advancedOptions = this.getNodeParameter('advancedOptions', i, {}) as any;
 
-          // Build the post payload
+          // Build the post payload (matching RobinReach API format)
           const postPayload: any = {
             content: content,
-            social_profile_ids: socialProfiles.map(id => parseInt(id)),
             status: postAction === 'publish' ? 'published' : 
                    postAction === 'schedule' ? 'scheduled' : 'draft',
+            social_profile_ids: socialProfiles,
           };
 
-          // Add schedule time if scheduling
+          // Add publish time and timezone (required for all posts)
           if (postAction === 'schedule') {
             const scheduleTime = this.getNodeParameter('scheduleTime', i) as string;
             const timezone = this.getNodeParameter('timezone', i, 'UTC') as string;
             postPayload.publish_time = scheduleTime;
             postPayload.timezone = timezone;
+          } else {
+            // For publish now and draft, use current time
+            const now = new Date();
+            postPayload.publish_time = now.toISOString();
+            postPayload.timezone = 'UTC';
           }
 
           // Add labels if provided
@@ -510,17 +534,17 @@ export class RobinReach implements INodeType {
 
           // Handle media URLs
           if (advancedOptions.mediaUrls && advancedOptions.mediaUrls.length > 0) {
-            postPayload.attachments = advancedOptions.mediaUrls;
+            postPayload.media_urls = advancedOptions.mediaUrls;
           }
 
           // Handle platform-specific settings
           if (advancedOptions.platformSettings) {
-            postPayload.platform_attributes = {};
+            postPayload.platform_options = {};
             
             // Facebook settings
             if (advancedOptions.platformSettings.facebook) {
               const fb = advancedOptions.platformSettings.facebook;
-              postPayload.platform_attributes.facebook = {
+              postPayload.platform_options.facebook = {
                 post_type: fb.postType || 'post',
                 comment: fb.comment || '',
               };
@@ -529,7 +553,7 @@ export class RobinReach implements INodeType {
             // Instagram settings
             if (advancedOptions.platformSettings.instagram) {
               const ig = advancedOptions.platformSettings.instagram;
-              postPayload.platform_attributes.instagram = {
+              postPayload.platform_options.instagram = {
                 post_type: ig.postType || 'post',
                 comment: ig.comment || '',
               };
@@ -538,7 +562,7 @@ export class RobinReach implements INodeType {
             // Twitter settings
             if (advancedOptions.platformSettings.twitter) {
               const tw = advancedOptions.platformSettings.twitter;
-              postPayload.platform_attributes.twitter = {
+              postPayload.platform_options.twitter = {
                 replies: tw.replies || [],
               };
             }
@@ -553,16 +577,53 @@ export class RobinReach implements INodeType {
           }
 
           // Create the post
-          responseData = await this.helpers.requestWithAuthentication.call(
-            this,
-            'robinReachApi',
-            {
-              method: 'POST',
-              url: '/posts',
-              body: postPayload,
-              json: true,
-            },
-          );
+          const credentials = await this.getCredentials('robinReachApi');
+          const baseURL = credentials['environment'] === 'development' 
+            ? 'http://localhost:3000/api/v1' 
+            : 'https://robinreach.com/api/v1';
+
+          // Debug: Log the payload being sent
+          console.log('RobinReach API Payload:', JSON.stringify(postPayload, null, 2));
+
+          try {
+            // First validate the request
+            const validationResponse = await this.helpers.requestWithAuthentication.call(
+              this,
+              'robinReachApi',
+              {
+                method: 'POST',
+                url: `${baseURL}/posts/validate`,
+                body: postPayload,
+                json: true,
+              },
+            );
+            console.log('Validation Response:', JSON.stringify(validationResponse, null, 2));
+
+            // If validation passes, create the post
+            responseData = await this.helpers.requestWithAuthentication.call(
+              this,
+              'robinReachApi',
+              {
+                method: 'POST',
+                url: `${baseURL}/posts`,
+                body: postPayload,
+                json: true,
+              },
+            );
+          } catch (validationError: any) {
+            console.log('Validation Error:', JSON.stringify(validationError, null, 2));
+            // Try creating anyway in case validation endpoint has issues
+            responseData = await this.helpers.requestWithAuthentication.call(
+              this,
+              'robinReachApi',
+              {
+                method: 'POST',
+                url: `${baseURL}/posts`,
+                body: postPayload,
+                json: true,
+              },
+            );
+          }
 
           // Format successful response
           returnData.push({
