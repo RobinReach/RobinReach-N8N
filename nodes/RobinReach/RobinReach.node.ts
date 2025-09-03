@@ -6,6 +6,7 @@ import {
   ILoadOptionsFunctions,
   INodePropertyOptions,
   NodeOperationError,
+  NodeConnectionType,
 } from 'n8n-workflow';
 
 export class RobinReach implements INodeType {
@@ -20,8 +21,8 @@ export class RobinReach implements INodeType {
     defaults: {
       name: 'RobinReach',
     },
-    inputs: ['main'],
-    outputs: ['main'],
+    inputs: [NodeConnectionType.Main],
+    outputs: [NodeConnectionType.Main],
     credentials: [
       {
         name: 'robinReachApi',
@@ -349,7 +350,7 @@ export class RobinReach implements INodeType {
             description: brand.email || brand.website || '',
           }));
         } catch (error) {
-          throw new NodeOperationError(this.getNode(), `Failed to load brands: ${error.message}`);
+          throw new NodeOperationError(this.getNode(), `Failed to load brands: ${error instanceof Error ? error.message : String(error)}`);
         }
       },
 
@@ -379,7 +380,7 @@ export class RobinReach implements INodeType {
             description: `${profile.platform} - ${profile.name}`,
           }));
         } catch (error) {
-          throw new NodeOperationError(this.getNode(), `Failed to load social profiles: ${error.message}`);
+          throw new NodeOperationError(this.getNode(), `Failed to load social profiles: ${error instanceof Error ? error.message : String(error)}`);
         }
       },
 
