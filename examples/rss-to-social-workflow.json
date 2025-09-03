@@ -1,0 +1,106 @@
+{
+  "name": "RSS Feed to Social Media",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://your-blog.com/feed.xml",
+        "options": {
+          "ignoreSSL": false
+        }
+      },
+      "id": "rss-feed",
+      "name": "RSS Feed Reader",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "dateTime": [
+            {
+              "value1": "={{ $json.pubDate }}",
+              "operation": "after",
+              "value2": "={{ DateTime.now().minus({hours: 24}).toISO() }}"
+            }
+          ]
+        }
+      },
+      "id": "filter-new-posts",
+      "name": "Filter New Posts",
+      "type": "n8n-nodes-base.if",
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "listBrands"
+      },
+      "id": "get-brands",
+      "name": "Get Brands",
+      "type": "n8n-nodes-robinreach.robinReach",
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "operation": "createPost",
+        "brandId": "={{ $json.brands[0].id }}",
+        "content": "📝 New blog post: {{ $('RSS Feed Reader').first().json.title }}\\n\\n{{ $('RSS Feed Reader').first().json.contentSnippet }}\\n\\nRead more: {{ $('RSS Feed Reader').first().json.link }}",
+        "socialProfiles": ["1", "2", "3"],
+        "postAction": "schedule",
+        "scheduleTime": "={{ DateTime.now().plus({minutes: 30}).toISO() }}",
+        "timezone": "UTC",
+        "advancedOptions": {
+          "useAI": true,
+          "aiTone": "informative",
+          "labels": "blog, content, automated",
+          "platformSettings": {
+            "twitter": {
+              "replies": ["What do you think about this topic? 🤔"]
+            },
+            "facebook": {
+              "comment": "Thanks for reading! Don't forget to share your thoughts. 💭"
+            }
+          }
+        }
+      },
+      "id": "create-social-post",
+      "name": "Create Social Post",
+      "type": "n8n-nodes-robinreach.robinReach",
+      "position": [900, 300]
+    }
+  ],
+  "connections": {
+    "RSS Feed Reader": {
+      "main": [
+        [
+          {
+            "node": "Filter New Posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter New Posts": {
+      "main": [
+        [
+          {
+            "node": "Get Brands",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Brands": {
+      "main": [
+        [
+          {
+            "node": "Create Social Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

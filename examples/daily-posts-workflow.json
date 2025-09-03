@@ -1,0 +1,95 @@
+{
+  "name": "Daily Social Media Posts",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "value": 24
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "operation": "listBrands"
+      },
+      "id": "get-brands",
+      "name": "Get Brands",
+      "type": "n8n-nodes-robinreach.robinReach",
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "listSocialProfiles",
+        "brandId": "={{ $json.brands[0].id }}"
+      },
+      "id": "get-profiles",
+      "name": "Get Social Profiles",
+      "type": "n8n-nodes-robinreach.robinReach",
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "operation": "createPost",
+        "brandId": "={{ $('Get Brands').first().json.brands[0].id }}",
+        "content": "Good morning! Ready to make today amazing? 🌟 #motivation #success #goodmorning",
+        "socialProfiles": "={{ $('Get Social Profiles').first().json.socialProfiles.map(p => p.id.toString()) }}",
+        "postAction": "schedule",
+        "scheduleTime": "={{ DateTime.now().plus({hours: 1}).toISO() }}",
+        "timezone": "America/New_York",
+        "advancedOptions": {
+          "useAI": true,
+          "aiTone": "enthusiastic",
+          "labels": "daily, motivation, automated"
+        }
+      },
+      "id": "create-post",
+      "name": "Create Daily Post",
+      "type": "n8n-nodes-robinreach.robinReach",
+      "position": [900, 300]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Brands",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Brands": {
+      "main": [
+        [
+          {
+            "node": "Get Social Profiles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Social Profiles": {
+      "main": [
+        [
+          {
+            "node": "Create Daily Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
