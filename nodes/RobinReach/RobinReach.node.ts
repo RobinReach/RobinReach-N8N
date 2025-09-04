@@ -582,48 +582,17 @@ export class RobinReach implements INodeType {
             ? 'http://localhost:3000/api/v1' 
             : 'https://robinreach.com/api/v1';
 
-          // Debug: Log the payload being sent
-          console.log('RobinReach API Payload:', JSON.stringify(postPayload, null, 2));
-
-          try {
-            // First validate the request
-            const validationResponse = await this.helpers.requestWithAuthentication.call(
-              this,
-              'robinReachApi',
-              {
-                method: 'POST',
-                url: `${baseURL}/posts/validate`,
-                body: postPayload,
-                json: true,
-              },
-            );
-            console.log('Validation Response:', JSON.stringify(validationResponse, null, 2));
-
-            // If validation passes, create the post
-            responseData = await this.helpers.requestWithAuthentication.call(
-              this,
-              'robinReachApi',
-              {
-                method: 'POST',
-                url: `${baseURL}/posts`,
-                body: postPayload,
-                json: true,
-              },
-            );
-          } catch (validationError: any) {
-            console.log('Validation Error:', JSON.stringify(validationError, null, 2));
-            // Try creating anyway in case validation endpoint has issues
-            responseData = await this.helpers.requestWithAuthentication.call(
-              this,
-              'robinReachApi',
-              {
-                method: 'POST',
-                url: `${baseURL}/posts`,
-                body: postPayload,
-                json: true,
-              },
-            );
-          }
+          // Create the post
+          responseData = await this.helpers.requestWithAuthentication.call(
+            this,
+            'robinReachApi',
+            {
+              method: 'POST',
+              url: `${baseURL}/posts`,
+              body: postPayload,
+              json: true,
+            },
+          );
 
           // Format successful response
           returnData.push({
