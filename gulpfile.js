@@ -6,13 +6,23 @@ function copyIcons() {
     .src('icons/**/*.{png,svg}')
     .pipe(gulp.dest('dist/icons/'));
   
-  // Copy PNG icons to node directories where n8n looks for them
+  // Copy icons to node directories where n8n looks for them
   gulp
-    .src('icons/*.png')
+    .src(['icons/*.png', 'icons/*.svg'])
     .pipe(gulp.dest('dist/nodes/RobinReach/'));
   
+  // Copy node-specific icons if they exist
+  gulp
+    .src('nodes/RobinReach/*.svg')
+    .pipe(gulp.dest('dist/nodes/RobinReach/'));
+  
+  // Copy credentials-specific icons if they exist
+  gulp
+    .src('credentials/*.svg')
+    .pipe(gulp.dest('dist/credentials/'));
+  
   return gulp
-    .src('icons/*.png')
+    .src(['icons/*.png', 'icons/*.svg'])
     .pipe(gulp.dest('dist/credentials/'));
 }
 

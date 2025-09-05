@@ -13,7 +13,7 @@ export class RobinReach implements INodeType {
   description: INodeTypeDescription = {
     displayName: 'RobinReach',
     name: 'robinReach',
-    icon: 'robinreach-favicon.png' as any,
+    icon: 'icon.svg' as any,
     group: ['transform'],
     version: 1,
     subtitle: '={{$parameter["operation"]}}',

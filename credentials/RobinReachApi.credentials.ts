@@ -9,7 +9,7 @@ export class RobinReachApi implements ICredentialType {
   name = 'robinReachApi';
   displayName = 'RobinReach API';
   documentationUrl = 'https://robinreach.com/api-docs';
-  icon = 'robinreach-favicon.png' as any;
+  icon = 'icon.svg' as any;
   
   properties: INodeProperties[] = [
     {

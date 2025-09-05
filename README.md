@@ -4,7 +4,7 @@
 
 An n8n community node for the **RobinReach API** - the AI-powered social media management platform.
 
-**Schedule and manage AI-enhanced social media posts across 11+ platforms:**
+**Schedule and manage AI-enhanced social media posts across 10+ platforms:**
 
 * 🐦 **Twitter/X** - Posts, threads, and automation
 * 📸 **Instagram** - Posts, Stories, Reels with AI optimization
@@ -14,7 +14,6 @@ An n8n community node for the **RobinReach API** - the AI-powered social media m
 * 📹 **YouTube** - Videos and Shorts with AI descriptions
 * 🧵 **Threads** - Meta's social platform
 * 📌 **Pinterest** - Visual content with AI optimization
-* 💬 **Telegram** - Channel and group posting
 * 📱 **WhatsApp Business** - Business messaging
 * 🎭 **Mastodon** - Decentralized social networking
 
