@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-robinreach",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An n8n community node for the RobinReach API - the AI-powered social media management platform",
   "keywords": [
     "n8n-community-node-package",
