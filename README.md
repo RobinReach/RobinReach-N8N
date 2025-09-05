@@ -1,21 +1,19 @@
 # n8n-nodes-robinreach
 
-![RobinReach Logo](https://robinreach.com/logo.png)
+An n8n community node for the **RobinReach API** - the social media management platform.
 
-An n8n community node for the **RobinReach API** - the AI-powered social media management platform.
+**Schedule and manage social media posts across 10+ platforms:**
 
-**Schedule and manage AI-enhanced social media posts across 10+ platforms:**
-
-* 🐦 **Twitter/X** - Posts, threads, and automation
-* 📸 **Instagram** - Posts, Stories, Reels with AI optimization
-* 👤 **Facebook** - Page management and AI-enhanced posting
-* 💼 **LinkedIn** - Personal and company page posting
-* 🎵 **TikTok** - Video posting with AI content suggestions
-* 📹 **YouTube** - Videos and Shorts with AI descriptions
-* 🧵 **Threads** - Meta's social platform
-* 📌 **Pinterest** - Visual content with AI optimization
-* 📱 **WhatsApp Business** - Business messaging
-* 🎭 **Mastodon** - Decentralized social networking
+* **Twitter/X** - Posts, threads, and automation
+* **Instagram** - Posts, Stories, and Reels
+* **Facebook** - Page management and posting
+* **LinkedIn** - Personal and company page posting
+* **TikTok** - Video posting
+* **YouTube** - Videos and Shorts
+* **Threads** - Meta's social platform
+* **Pinterest** - Visual content
+* **Bluesky** - Decentralized social networking
+* **Google My Business** - Business profile management
 
 ## Version History
 
@@ -84,7 +82,7 @@ List social media accounts connected to a brand:
 
 ### 3. Create and Publish a Post
 
-Create AI-enhanced posts across multiple platforms:
+Create posts across multiple platforms:
 
 ```json
 {
@@ -93,13 +91,9 @@ Create AI-enhanced posts across multiple platforms:
   "content": "Hello, world! 🌍 #automation",
   "socialProfileIds": ["profile_123", "profile_456"],
   "publishType": "publish_now",
-  "useAiEnhancement": true,
   "platformSettings": {
     "facebook": {
       "link_preview": true
-    },
-    "twitter": {
-      "thread_unroll": false
     },
     "instagram": {
       "first_comment": "Check out our latest update! 🚀"
@@ -128,34 +122,7 @@ Create AI-enhanced posts across multiple platforms:
 * **Update Post** - Edit draft/scheduled posts
 * **Delete Post** - Delete posts (published posts may have limitations)
 
-### AI Enhancement
-
-* **Generate Content** - Use RobinReach's AI to generate post content
-* **Optimize Content** - AI-optimize existing content for specific platforms
-* **Generate Hashtags** - AI-powered hashtag suggestions
-* **Content Analysis** - Analyze content performance potential
-
 ## Advanced Features
-
-### AI Content Generation
-
-Leverage RobinReach's AI capabilities:
-
-```json
-{
-  "operation": "createPost",
-  "brandId": "brand_123_abc",
-  "content": "Write about sustainable technology trends",
-  "useAiEnhancement": true,
-  "aiSettings": {
-    "tone": "professional",
-    "length": "medium",
-    "include_hashtags": true,
-    "include_emojis": true,
-    "target_audience": "tech professionals"
-  }
-}
-```
 
 ### Platform-Specific Settings
 
@@ -192,7 +159,6 @@ Leverage RobinReach's AI capabilities:
 {
   "platformSettings": {
     "twitter": {
-      "thread_unroll": true,
       "reply_restrictions": "everyone"
     }
   }
@@ -249,6 +215,9 @@ Organize posts with labels:
 * **YouTube**: Channel access required
 * **Twitter/X**: Standard account
 * **Pinterest**: Business account recommended
+* **Threads**: Meta account required
+* **Bluesky**: Standard account
+* **Google My Business**: Business profile admin access required
 
 ## Plan Limits
 
@@ -281,14 +250,14 @@ Create a workflow that posts daily content:
 1. **Schedule Trigger** - Daily at 9 AM
 2. **RobinReach: List Brands** - Get your brands
 3. **RobinReach: List Social Profiles** - Get connected accounts
-4. **RobinReach: Create Post** - AI-generated daily content
+4. **RobinReach: Create Post** - Create daily content
 
 ### RSS to Social Media
 
 Convert blog posts to social media content:
 
 1. **RSS Feed Read** - Monitor your blog
-2. **RobinReach: Create Post** - AI-enhanced social posts
+2. **RobinReach: Create Post** - Create social posts
 3. **Multiple Platforms** - Automatic cross-posting
 
 ### Content Repurposing
@@ -296,8 +265,7 @@ Convert blog posts to social media content:
 Repurpose content across platforms:
 
 1. **Webhook Trigger** - New content alert
-2. **RobinReach: Generate Content** - AI adaptation for each platform
-3. **RobinReach: Create Post** - Platform-optimized posting
+2. **RobinReach: Create Post** - Platform-optimized posting
 
 ## Development
 
@@ -326,7 +294,7 @@ npm run lintfix     # Fix automatically
 ## Support
 
 * **Documentation**: [RobinReach API Docs](https://robinreach.com/api-docs)
-* **Dashboard**: [robinreach.com/dashboard](https://robinreach.com/dashboard)
+* **Dashboard**: [robinreach.com](https://robinreach.com)
 * **Email**: support@robinreach.com
 * **Issues**: [GitHub Issues](https://github.com/robinreach/n8n-nodes-robinreach/issues)
 
@@ -340,6 +308,6 @@ Contributions are welcome! Please read our [contributing guidelines](CONTRIBUTIN
 
 ---
 
-**Made with ❤️ by the RobinReach team**
+**Made with 💙 by the RobinReach team**
 
-[Website](https://robinreach.com) • [Documentation](https://robinreach.com/api-docs) • [Dashboard](https://robinreach.com/dashboard)
+[Website](https://robinreach.com) • [Documentation](https://robinreach.com/api-docs)
