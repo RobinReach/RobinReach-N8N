@@ -109,20 +109,14 @@ Create posts across multiple platforms:
 ### Brands Management
 
 * **List Brands** - Get all your RobinReach brands/companies
-* **Get Brand** - Get specific brand details
 
 ### Social Profiles
 
 * **List Social Profiles** - Get connected social media accounts for a brand
-* **Get Profile** - Get specific social profile details
 
 ### Posts Management
 
 * **Create Post** - Create and publish/schedule/draft posts
-* **List Posts** - Get posts with pagination and filters
-* **Get Post** - Get specific post details
-* **Update Post** - Edit draft/scheduled posts
-* **Delete Post** - Delete posts (published posts may have limitations)
 
 ## Advanced Features
 
