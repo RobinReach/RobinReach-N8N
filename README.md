@@ -4,16 +4,16 @@ An n8n community node for the **RobinReach API** - the social media management p
 
 **Schedule and manage social media posts across 10+ platforms:**
 
-* **Twitter/X** - Posts, threads, and automation
-* **Instagram** - Posts, Stories, and Reels
-* **Facebook** - Page management and posting
-* **LinkedIn** - Personal and company page posting
-* **TikTok** - Video posting
-* **YouTube** - Videos and Shorts
-* **Threads** - Meta's social platform
-* **Pinterest** - Visual content
-* **Bluesky** - Decentralized social networking
-* **Google My Business** - Business profile management
+* **Twitter/X** 
+* **Instagram** 
+* **Facebook** 
+* **LinkedIn** 
+* **TikTok** 
+* **YouTube** 
+* **Threads** 
+* **Pinterest** 
+* **Bluesky** 
+* **Google My Business** 
 
 ## Version History
 
