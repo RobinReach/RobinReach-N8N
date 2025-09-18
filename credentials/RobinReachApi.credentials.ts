@@ -9,7 +9,7 @@ export class RobinReachApi implements ICredentialType {
   name = 'robinReachApi';
   displayName = 'RobinReach API';
   documentationUrl = 'https://robinreach.com/api-docs';
-  icon = 'icon.svg' as any;
+  icon = 'file:robinreach.svg' as const;
   
   properties: INodeProperties[] = [
     {
@@ -63,9 +63,9 @@ export class RobinReachApi implements ICredentialType {
       {
         type: 'responseSuccessBody',
         properties: {
-          message: 'Authentication successful',
           key: 'success',
           value: true,
+          message: 'Authentication successful',
         },
       },
     ],
