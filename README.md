@@ -93,10 +93,12 @@ Create posts across multiple platforms:
   "publishType": "publish_now",
   "platformSettings": {
     "facebook": {
-      "link_preview": true
+      "postType": "post",
+      "comment": "Check out our latest update! 🚀"
     },
     "instagram": {
-      "first_comment": "Check out our latest update! 🚀"
+      "postType": "post",
+      "comment": "Check out our latest update! 🚀"
     }
   }
 }
@@ -132,8 +134,8 @@ Create posts across multiple platforms:
 {
   "platformSettings": {
     "facebook": {
-      "link_preview": true,
-      "call_to_action": "Learn More"
+      "postType": "post",
+      "comment": "Auto-comment after posting..."
     }
   }
 }
@@ -145,9 +147,8 @@ Create posts across multiple platforms:
 {
   "platformSettings": {
     "instagram": {
-      "first_comment": "What do you think? Let me know below! 👇",
-      "location_id": "123456789",
-      "user_tags": ["@username"]
+      "postType": "post",
+      "comment": "What do you think? Let me know below! 👇"
     }
   }
 }
@@ -159,7 +160,7 @@ Create posts across multiple platforms:
 {
   "platformSettings": {
     "twitter": {
-      "reply_restrictions": "everyone"
+      "replies": ["Follow-up tweet for thread", "Another reply in the thread"]
     }
   }
 }
