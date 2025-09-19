@@ -333,12 +333,18 @@ export class RobinReach implements INodeType {
       // Load available brands
       async getBrands(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
         try {
+          // Get the base URL from credentials
+          const credentials = await this.getCredentials('robinReachApi');
+          const baseURL = credentials['environment'] === 'development' 
+            ? 'http://localhost:3000/api/v1' 
+            : 'https://robinreach.com/api/v1';
+            
           const responseData = await this.helpers.requestWithAuthentication.call(
             this,
             'robinReachApi',
             {
               method: 'GET',
-              url: '/brands',
+              url: `${baseURL}/brands`,
               json: true,
             },
           );
@@ -363,12 +369,18 @@ export class RobinReach implements INodeType {
         }
 
         try {
+          // Get the base URL from credentials
+          const credentials = await this.getCredentials('robinReachApi');
+          const baseURL = credentials['environment'] === 'development' 
+            ? 'http://localhost:3000/api/v1' 
+            : 'https://robinreach.com/api/v1';
+            
           const responseData = await this.helpers.requestWithAuthentication.call(
             this,
             'robinReachApi',
             {
               method: 'GET',
-              url: `/social_profiles?brand_id=${brandId}`,
+              url: `${baseURL}/social_profiles?brand_id=${brandId}`,
               json: true,
             },
           );
@@ -407,6 +419,12 @@ export class RobinReach implements INodeType {
     const items = this.getInputData();
     const returnData: INodeExecutionData[] = [];
     const operation = this.getNodeParameter('operation', 0) as string;
+    
+    // Get the base URL from credentials
+    const credentials = await this.getCredentials('robinReachApi');
+    const baseURL = credentials['environment'] === 'development' 
+      ? 'http://localhost:3000/api/v1' 
+      : 'https://robinreach.com/api/v1';
 
     for (let i = 0; i < items.length; i++) {
       try {
@@ -421,7 +439,7 @@ export class RobinReach implements INodeType {
             'robinReachApi',
             {
               method: 'GET',
-              url: '/brands',
+              url: `${baseURL}/brands`,
               json: true,
             },
           );
@@ -455,7 +473,7 @@ export class RobinReach implements INodeType {
             'robinReachApi',
             {
               method: 'GET',
-              url: `/social_profiles?brand_id=${brandId}`,
+              url: `${baseURL}/social_profiles?brand_id=${brandId}`,
               json: true,
             },
           );
@@ -558,7 +576,7 @@ export class RobinReach implements INodeType {
             'robinReachApi',
             {
               method: 'POST',
-              url: '/posts',
+              url: `${baseURL}/posts`,
               body: postPayload,
               json: true,
             },
