@@ -15,8 +15,8 @@ This guide helps you test the RobinReach N8N community node thoroughly before pu
 
 ```bash
 # Clone and setup
-git clone https://github.com/robinreach/n8n-nodes-robinreach.git
-cd n8n-nodes-robinreach
+git clone https://github.com/RobinReach/RobinReach-N8N.git
+cd RobinReach-N8N
 
 # Run setup script
 ./scripts/setup-dev.sh

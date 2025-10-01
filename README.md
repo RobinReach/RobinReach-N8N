@@ -37,8 +37,8 @@ npm install n8n-nodes-robinreach
 ### From Source
 
 ```bash
-git clone https://github.com/robinreach/n8n-nodes-robinreach.git
-cd n8n-nodes-robinreach
+git clone https://github.com/RobinReach/RobinReach-N8N.git
+cd RobinReach-N8N
 npm install
 npm run build
 ```
@@ -273,8 +273,8 @@ Repurpose content across platforms:
 ### Setup
 
 ```bash
-git clone https://github.com/robinreach/n8n-nodes-robinreach.git
-cd n8n-nodes-robinreach
+git clone https://github.com/RobinReach/RobinReach-N8N.git
+cd RobinReach-N8N
 npm install
 npm run build
 ```
@@ -291,7 +291,7 @@ npm run lintfix     # Fix automatically
 * **Documentation**: [RobinReach API Docs](https://robinreach.com/api-docs)
 * **Dashboard**: [robinreach.com](https://robinreach.com)
 * **Email**: support@robinreach.com
-* **Issues**: [GitHub Issues](https://github.com/robinreach/n8n-nodes-robinreach/issues)
+* **Issues**: [GitHub Issues](https://github.com/RobinReach/RobinReach-N8N/issues)
 
 ## License
 

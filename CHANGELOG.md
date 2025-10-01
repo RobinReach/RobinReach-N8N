@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.7] - 2025-10-01
+
+### Changed
+- Updated repository links to correct GitHub URL: https://github.com/RobinReach/RobinReach-N8N
+- Updated cloning instructions in README/CONTRIBUTING/TESTING to use the new repo path
+- Updated issues links in README/GUIDE/GUIDE.txt to the new repo path
+
 ### Added
 - Initial release of RobinReach N8N community node
 - Support for listing brands/companies

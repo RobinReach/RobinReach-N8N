@@ -541,7 +541,7 @@ A: Use conditional logic in n8n to create different content versions for differe
 - **RobinReach Knowledge Base**: [info.robinreach.com](https://info.robinreach.com/)
 - **RobinReach API Documentation**: [robinreach.com/api-docs](https://robinreach.com/api-docs)
 - **n8n Community**: [community.n8n.io](https://community.n8n.io)
-- **GitHub Issues**: [Report bugs and feature requests](https://github.com/robinreach/n8n-nodes-robinreach/issues)
+- **GitHub Issues**: [Report bugs and feature requests](https://github.com/RobinReach/RobinReach-N8N/issues)
 - **Email Support**: support@robinreach.com
 
 ---

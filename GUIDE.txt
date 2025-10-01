@@ -141,8 +141,7 @@ The RobinReach node supports three main operations:
    - Display available brands in dynamic workflows
    - Validate brand access
    
-   Output: Array of brand objects with ID, name, email, website, 
-           timezone, and country
+   Output: Array of brand objects with ID, name, email, website, timezone, and country
 
 2. LIST SOCIAL PROFILES
    Purpose: Get connected social media accounts for a specific brand
@@ -155,8 +154,7 @@ The RobinReach node supports three main operations:
    - Check which platforms are connected
    - Validate social account status
    
-   Output: Array of social profile objects with ID, name, platform, 
-           and connection status
+   Output: Array of social profile objects with ID, name, platform, and connection status
 
 3. CREATE POST
    Purpose: Create, schedule, or draft social media posts
@@ -531,7 +529,7 @@ SUPPORT RESOURCES
 - RobinReach Knowledge Base: info.robinreach.com
 - RobinReach API Documentation: robinreach.com/api-docs
 - n8n Community: community.n8n.io
-- GitHub Issues: github.com/robinreach/n8n-nodes-robinreach/issues
+- GitHub Issues: github.com/RobinReach/RobinReach-N8N/issues
 - Email Support: support@robinreach.com
 
 ================================================================================

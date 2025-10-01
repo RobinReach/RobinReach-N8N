@@ -15,8 +15,8 @@ Thank you for your interest in contributing to the RobinReach N8N community node
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/robinreach/n8n-nodes-robinreach.git
-cd n8n-nodes-robinreach
+git clone https://github.com/RobinReach/RobinReach-N8N.git
+cd RobinReach-N8N
 ```
 
 2. **Install dependencies**

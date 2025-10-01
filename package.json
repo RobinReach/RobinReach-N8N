@@ -22,17 +22,17 @@
     "content-generation"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/robinreach/n8n-nodes-robinreach#readme",
+  "homepage": "https://github.com/RobinReach/RobinReach-N8N#readme",
   "author": {
     "name": "RobinReach Team",
     "email": "support@robinreach.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robinreach/n8n-nodes-robinreach.git"
+    "url": "git+https://github.com/RobinReach/RobinReach-N8N.git"
   },
   "bugs": {
-    "url": "https://github.com/robinreach/n8n-nodes-robinreach/issues"
+    "url": "https://github.com/RobinReach/RobinReach-N8N/issues"
   },
   "main": "index.js",
   "scripts": {
